@@ -117,7 +117,7 @@ internals.implementation = function (server, options) {
                 // Check cookie
                 var session = request.state[settings.cookie];
                 if (!session) {
-                    server.root.itsaServer.generateView(settings.loginView, request, reply);
+                    reply.reactview(settings.loginView);
                 }
                 else {
                     settings.validateCookie.call(request, session, function (err, isValid, credentials) {
@@ -125,7 +125,7 @@ internals.implementation = function (server, options) {
                             if (settings.clearInvalid) {
                                 reply.unstate(settings.cookie);
                             }
-                            server.root.itsaServer.generateView(settings.loginView, request, reply);
+                            reply.reactview(settings.loginView);
                             return;
                         }
 
